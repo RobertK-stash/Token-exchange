@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "key": "arbitrum",
+    "label": "Arbitrum"
+  },
+  {
+    "id": 2,
+    "key": "ethereum",
+    "label": "Ethereum"
+  },
+  {
+    "id": 3,
+    "key": "polygon",
+    "label": "Polygon"
+}
+]

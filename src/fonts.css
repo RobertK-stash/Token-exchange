@@ -1,0 +1,84 @@
+@font-face {
+  font-family: HelveticaNeueLTPro-Bd;
+  src: url("./assets/fonts/helvetica-neue/Linotype-HelveticaNeueLTPro-Bd.otf")
+    format("truetype");
+}
+@font-face {
+  font-family: HelveticaNeueLTPro-Md;
+  src: url("./assets/fonts/helvetica-neue/Linotype-HelveticaNeueLTPro-Md.otf")
+    format("truetype");
+}
+@font-face {
+    font-family: HelveticaNeueLTPro-Lt;
+    src: url("./assets/fonts/helvetica-neue/Linotype-HelveticaNeueLTPro-Lt.otf") format("truetype");
+}
+@font-face {
+    font-family: HelveticaNeueLTPro-Rm;
+    src: url("./assets/fonts/helvetica-neue/Linotype-HelveticaNeueLTPro-Roman.otf") format("truetype");
+}
+@font-face {
+    font-family: HelveticaNeueLTPro-It;
+    src: url("./assets/fonts/helvetica-neue/Linotype-HelveticaNeueLTPro-It.otf") format("truetype");
+}
+
+@font-face {
+  font-family: DMSans-Bold;
+  src: url("./assets/fonts/DM-sans/DMSans-Bold.ttf")
+    format("truetype");
+}
+@font-face {
+  font-family: DMSans-BoldItalic;
+  src: url("./assets/fonts/DM-sans/DMSans-BoldItalic.ttf")
+    format("truetype");
+}
+@font-face {
+    font-family: DMSans-Italic;
+    src: url("./assets/fonts/DM-sans/DMSans-Italic.ttf") format("truetype");
+}
+@font-face {
+    font-family: DMSans-Medium;
+    src: url("./assets/fonts/DM-sans/DMSans-Medium.ttf") format("truetype");
+}
+@font-face {
+    font-family: DMSans-MediumItalic;
+    src: url("./assets/fonts/DM-sans/DMSans-MediumItalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: DMSans-Regular;
+  src: url("./assets/fonts/DM-sans/DMSans-Regular.ttf") format("truetype");
+}
+
+.font-regular {
+    font-family: HelveticaNeueLTPro-Rm;
+}
+.font-medium {
+    font-family: HelveticaNeueLTPro-Md;
+}
+.font-light {
+    font-family: HelveticaNeueLTPro-Lt;
+}
+.font-bold {
+    font-family: HelveticaNeueLTPro-Bd;
+}
+.font-italic {
+    font-family: HelveticaNeueLTPro-It;
+}
+
+.font-sans-regular {
+  font-family: DMSans-Regular
+}
+.font-sans-bold {
+  font-family: DMSans-Bold
+}
+.font-sans-bolditalic {
+  font-family: DMSans-BoldItalic
+}
+.font-sans-italic {
+  font-family: DMSans-Italic
+}
+.font-sans-mediumitalic {
+  font-family: DMSans-MediumItalic
+}
+.font-sans-medium {
+  font-family: DMSans-Medium
+}

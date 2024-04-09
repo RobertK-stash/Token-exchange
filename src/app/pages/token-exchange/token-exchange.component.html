@@ -1,0 +1,42 @@
+<img class="background-img" src="/assets/img/token-exchange/Neon-Theme-Swapper.svg" alt=""/>
+<div class="token-exchange-container">
+  <div class="token-form-container">
+    <div class="image-container">
+      <img class="helix-img" src="/assets/img/token-exchange/purple-helix.svg" alt=""/>
+      <div class="image-header">Welcome to</div>
+      <img class="logo-img" src="/assets/img/token-exchange/genomes-dao.svg" alt=""/>
+    </div>
+    <div class="form-container">
+      <div *ngIf="!hasWallet">
+        <div class="form-header">Welcome!</div>
+        <div class="form-subheader">Please connect wallet to continue</div>
+        <button class="start-sequence-btn purple-btn-fill filter-btn" (click)="connect()">Connect</button>
+      </div>
+      <div *ngIf="hasWallet">
+        <div class="form-balance">Your Balance {{ethBalance}} </div>
+        <div class="form-tokens">{{geneBalance}} GENE<span class='divider'></span>{{gnomeBalance}} GNOME</div>
+        <div class="form-wallet"><img class="helix-img" src="/assets/img/token-exchange/wallet.svg" alt=""/> Connected via Metamask - {{accounts.slice(0,7) + "..." + accounts.slice(accounts.length - 5)}}</div>
+        <div class="form-warning" *ngIf="!chainOption">! PLEASE SELECT CHAIN IN ORDER TO SEE YOUR BALANCE</div>
+      </div>
+      <form (ngSubmit)="deposit()" #f="ngForm" class="form-actions" [formGroup]="exchangeForm" [ngClass]="{'opaque': !hasWallet }">
+        <div class="dropdown">
+          <label>Select Chain</label>
+          <ng-select formControlName="chain" [items]="chain" bindLabel="label" [searchable]="false" (clear)="clearEvent()" (change)="applyChainSelect($event)" NgModel="chainOption" [disabled]="!hasWallet" #chainSelect></ng-select>
+          <div class="form-warning">{{chainError}}</div>
+        </div>
+        <div class="dropdown">
+          <label>Select Token</label>
+          <ng-select formControlName="token" [items]="token" bindLabel="label" [searchable]="false" (change)="applyTokenSelect($event)" NgModel="tokenOption" [disabled]="!hasWallet"></ng-select>
+        </div>
+        <button class="start-sequence-btn purple-btn-fill filter-btn" [disabled]="!hasWallet || !chainOption || !tokenOption || chainError">Deposit</button>
+      </form>
+      <div class="terms-conditions" [ngClass]="{'opaque': !hasWallet }">By depositing my GENE or GNOME tokens I agree to the <a target=”_blank” routerLink="/terms">Terms and Conditions</a></div>
+      <div class="token-info-container">
+        <div class="info-icon">
+          <img class="helix-img" src="/assets/img/token-exchange/circle-info.svg" alt=""/>
+        </div>
+        <div class="info-text">To prevent double dipping GENOME will be airdropped to your wallet at 10am UTC on the following day for all wallets that qualify.</div>
+      </div>
+    </div>
+  </div>
+</div>
