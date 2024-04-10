@@ -2,16 +2,55 @@
   {
     "id": 1,
     "key": "arbitrum",
-    "label": "Arbitrum"
+    "label": "Arbitrum",
+    "name": "Arbitrum One",
+    "chainId": 42161,
+    "rpcUrls": [
+      "https://arbitrum-mainnet.infura.io"
+    ],
+    "nativeCurrency": {
+      "name": "ETH",
+      "symbol": "ETH",
+      "decimals": 18
+    },
+    "blockExplorerUrls": [
+      "https://explorer.arbitrum.io"
+    ]
   },
   {
     "id": 2,
     "key": "ethereum",
-    "label": "Ethereum"
+    "label": "Ethereum",
+    "name": "EThereum Mainnet",
+    "chainId": 1,
+    "rpcUrls": [
+      "https://cloudflare-eth.com"
+    ],
+    "nativeCurrency": {
+      "name": "ETH",
+      "symbol": "ETH",
+      "decimals": 18
+    },
+    "blockExplorerUrls": [
+      "https://etherscan.io"
+    ]
   },
   {
     "id": 3,
     "key": "polygon",
-    "label": "Polygon"
+    "label": "Polygon",
+    "name": "Polygon Mainnet",
+    "chainId": 137,
+    "rpcUrls": [
+      "https://polygon-rpc.com"
+    ],
+    "nativeCurrency": {
+      "name": "MATIC",
+      "symbol": "MATIC",
+      "decimals": 18
+    },
+    "blockExplorerUrls": [
+      "https://polygonscan.com"
+    ]
 }
 ]
