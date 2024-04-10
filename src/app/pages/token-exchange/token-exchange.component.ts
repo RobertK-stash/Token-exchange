@@ -33,16 +33,16 @@ const polygon = {
   chainId: 137,
   name: 'Polygon',
   currency: 'MATIC',
-  explorerUrl: 'https://etherscan.io',
-  rpcUrl: 'https://cloudflare-eth.com'
+  explorerUrl: 'https://polygonscan.com',
+  rpcUrl: 'https://polygon-rpc.com'
 }
 
 const arbitrum = {
   chainId: 42161,
-  name: 'Arbitrum',
-  currency: 'ARB',
-  explorerUrl: 'https://etherscan.io',
-  rpcUrl: 'https://cloudflare-eth.com'
+  name: 'Arbitrum One',
+  currency: 'ETH',
+  explorerUrl: 'https://arbiscan.io',
+  rpcUrl: 'https://arb1.arbitrum.io/rpc'
 }
 
 // 3. Create your application's metadata object
