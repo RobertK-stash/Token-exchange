@@ -20,13 +20,13 @@
       </div>
       <form (ngSubmit)="deposit()" #f="ngForm" class="form-actions" [formGroup]="exchangeForm" [ngClass]="{'opaque': !hasWallet }">
         <div class="dropdown">
-          <label>Select Chain</label>
-          <ng-select formControlName="chain" [items]="chain" bindLabel="label" [searchable]="false" (clear)="clearEvent()" (change)="applyChainSelect($event)" NgModel="chainOption" [disabled]="!hasWallet" #chainSelect></ng-select>
+          <label>Chain</label>
+          <ng-select formControlName="chain" placeholder="Select" [items]="chain" bindLabel="label" [searchable]="false" (clear)="clearEvent()" (change)="applyChainSelect($event)" NgModel="chainOption" [disabled]="!hasWallet" #chainSelect></ng-select>
           <div class="form-warning">{{chainError}}</div>
         </div>
         <div class="dropdown">
-          <label>Select Token</label>
-          <ng-select formControlName="token" [items]="token" bindLabel="label" [searchable]="false" (change)="applyTokenSelect($event)" NgModel="tokenOption" [disabled]="!hasWallet"></ng-select>
+          <label>Token</label>
+          <ng-select placeholder="Select" formControlName="token" [items]="token" bindLabel="label" [searchable]="false" (change)="applyTokenSelect($event)" NgModel="tokenOption" [disabled]="!hasWallet"></ng-select>
         </div>
         <button class="start-sequence-btn purple-btn-fill filter-btn" [disabled]="!hasWallet || !chainOption || !tokenOption || chainError">Deposit</button>
       </form>

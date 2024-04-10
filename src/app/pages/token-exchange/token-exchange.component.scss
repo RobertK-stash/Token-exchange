@@ -158,18 +158,16 @@
             font-style: normal;
             font-weight: 400;
             line-height: 107.2%;
-            margin-top: 30px;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            display: block;
           }
           ::ng-deep.ng-select-container {
             height: 59px;
-          }
-          ::ng-deep.ng-value, ::ng-deep.ng-clear-wrapper, ::ng-deep.ng-arrow-wrapper {
-            margin-top: 15px;
+            padding-top: 16px;
+            padding-bottom: 10px
           }
           ::ng-deep.ng-input {
-            input {
-              height: 59px;
-            }
             input:disabled{
               background-color: #f9f9f9 !important;
             }
@@ -186,6 +184,7 @@
         font-style: normal;
         font-weight: 400;
         line-height: 25px;
+        margin-top: 20px;
         a {
           color: #6C24A5;
           text-decoration: underline;
@@ -193,7 +192,7 @@
         }
       }
       .token-info-container {
-        margin-top: 65px;
+        margin-top: 35px;
         border-radius: 15px;
         background: rgba(183, 138, 240, 0.15);
         display: flex;
