@@ -8,8 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TermsComponent } from './pages/terms/terms.component';
 
 const routes: Routes = [
-  {path: "", redirectTo:'/genome', pathMatch: 'full'},
-  {path: 'genome', component: TokenExchangeComponent },
+  {path: "", component: TokenExchangeComponent},
   {path: 'terms', component: TermsComponent },
 ];
 
