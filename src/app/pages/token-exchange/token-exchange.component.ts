@@ -11,7 +11,6 @@ import BigNumber from "bignumber.js";
 import {
   GENE_ADDRESSES,
   GNOME_ADDRESSES,
-  NETWORK,
   TOKEN_EXCHANGE_ADDRESS
 } from "src/app/constants";
 import { createWeb3Modal, defaultConfig} from '@web3modal/ethers'
@@ -103,9 +102,10 @@ export class TokenExchangeComponent implements OnInit {
   isConnected:any = isConnected;
   provider: any;
   providerType: any;
-  testChain: any;
-  testGeneaddr: any;
-  testGnomeaddr: any;
+  transactionState: any = 0;
+  transactionHash: any;
+  transactionHashLink: any;
+  transactionBalance: any;
  
   constructor(
     private formBuilder: FormBuilder,
@@ -147,7 +147,6 @@ export class TokenExchangeComponent implements OnInit {
   }
 
   clearEvent() {
-    this.testChain = '';
     this.geneBalance = "-";
     this.gnomeBalance = "-";
   }
@@ -155,7 +154,6 @@ export class TokenExchangeComponent implements OnInit {
   async updateBalance() {
     this.geneBalance = await this.geneContract.balanceOf(this.accounts);
     this.gnomeBalance = await this.gnomeContract.balanceOf(this.accounts);
-    console.log('Account: ' + this.accounts + "   Chain: " + this.testChain + "   GENE: " + this.geneBalance + "  GNOME: " + this.gnomeBalance + " GENE ADDR: " + this.testGeneaddr + " GNOME ADDR: " + this.testGnomeaddr)
   }
 
   applyChainSelect(event) {
@@ -177,23 +175,14 @@ export class TokenExchangeComponent implements OnInit {
       case "Ethereum":
       this.geneContract = new Contract(GENE_ADDRESSES.ETHEREUM, GeneAbi, this.provider);
       this.gnomeContract = new Contract(GNOME_ADDRESSES.ETHEREUM, GnomeAbi, this.provider);
-      this.testGeneaddr = GENE_ADDRESSES.ETHEREUM;
-      this.testGnomeaddr = GNOME_ADDRESSES.ETHEREUM;
-      this.testChain = event.label;
       break;
       case "Arbitrum":
       this.geneContract = new Contract(GENE_ADDRESSES.ARBITRUM, GeneAbi, this.provider);
       this.gnomeContract = new Contract(GNOME_ADDRESSES.ARBITRUM, GnomeAbi, this.provider);
-      this.testGeneaddr = GENE_ADDRESSES.ARBITRUM;
-      this.testGnomeaddr = GNOME_ADDRESSES.ARBITRUM;
-      this.testChain = event.label;
       break;
       case "Polygon":
       this.geneContract = new Contract(GENE_ADDRESSES.POLYGON, GeneAbi, this.provider);
       this.gnomeContract = new Contract(GNOME_ADDRESSES.POLYGON, GnomeAbi, this.provider);
-      this.testGeneaddr = GENE_ADDRESSES.POLYGON;
-      this.testGnomeaddr = GNOME_ADDRESSES.POLYGON;
-      this.testChain = event.label;
       break;
       default:
       this.clearEvent();
@@ -244,34 +233,34 @@ export class TokenExchangeComponent implements OnInit {
   async deposit () {
     let tx: any;
     let _contract: any;
-    let _balance: any;
+    const _this = this;
     const signer = await this.provider.getSigner();
     switch (this.chainOption.label) {
       case "Ethereum":
         if (this.tokenOption.key == "gene") {
           _contract = new ethers.Contract(GENE_ADDRESSES.ETHEREUM, GeneAbi, signer);
-          _balance = this.geneBalance;
+          _this.transactionBalance = this.geneBalance;
         } else if (this.tokenOption.key == "gnome") {
           _contract =  new ethers.Contract(GNOME_ADDRESSES.ETHEREUM, GnomeAbi, signer);
-          _balance = this.gnomeBalance;
+          _this.transactionBalance = this.gnomeBalance;
         }
       break;
       case "Arbitrum":
         if (this.tokenOption.key == "gene") {
           _contract = new ethers.Contract(GENE_ADDRESSES.ARBITRUM, GeneAbi, signer);
-          _balance = this.geneBalance;
+          _this.transactionBalance = this.geneBalance;
         } else if (this.tokenOption.key == "gnome") {
           _contract =  new ethers.Contract(GNOME_ADDRESSES.ARBITRUM, GnomeAbi, signer);
-          _balance = this.gnomeBalance;
+          _this.transactionBalance = this.gnomeBalance;
         }
       break;
       case "Polygon":
         if (this.tokenOption.key == "gene") {
           _contract = new ethers.Contract(GENE_ADDRESSES.POLYGON, GeneAbi, signer);
-          _balance = this.geneBalance;
+          _this.transactionBalance = this.geneBalance;
         } else if (this.tokenOption.key == "gnome") {
           _contract =  new ethers.Contract(GNOME_ADDRESSES.POLYGON, GnomeAbi, signer);
-          _balance = this.gnomeBalance;
+          _this.transactionBalance = this.gnomeBalance;
         }
       break;
       default:
@@ -279,11 +268,23 @@ export class TokenExchangeComponent implements OnInit {
     }
 
     if (_contract) {
-      tx = await _contract.transfer(
-          TOKEN_EXCHANGE_ADDRESS,
-          _balance
-      );
-      this.updateBalance();
+        try {
+          tx = await _contract.transfer(TOKEN_EXCHANGE_ADDRESS, _this.transactionBalance);
+          _this.transactionHash = tx.hash; // display this in a modal so user can click an view on etherscan
+          this.transactionHashLink = this.chainOption.blockExplorerUrls[0] + '/tx/' + _this.transactionHash;
+          _this.transactionState = 1; //pending
+        } catch {
+        // user canceled by closing metamask window or wallet 
+          console.log('TODO');
+        }
+        const receipt = await tx.wait(1);
+        // at this stage tx should have a status
+        if (receipt.status == 1) {
+          _this.updateBalance();
+          _this.transactionState = 2; //success
+        } else {
+          _this.transactionState = 3; //failure
+        }
     }
   }
 
@@ -295,5 +296,9 @@ export class TokenExchangeComponent implements OnInit {
       const BIG_TEN = new BigNumber(10);
       return new BigNumber(bigAmount).dividedBy(BIG_TEN.pow(decimals));
     }
+  }
+  
+  onBackAction() {
+    window.location.reload();
   }
 }

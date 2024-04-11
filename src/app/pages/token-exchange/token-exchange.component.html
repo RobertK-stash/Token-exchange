@@ -11,11 +11,11 @@
         </div>
       </div>
     </div>
-    <div class="form-container">
+    <div class="form-container" *ngIf="transactionState == 0">
       <div *ngIf="!hasWallet" class="form-header-wrapper">
         <div class="form-header small-hide">Welcome!</div>
         <div class="form-subheader">Please connect <span class="small-show">your</span> wallet <span class="small-hide">to continue</span></div>
-        <button class="start-sequence-btn purple-btn-fill filter-btn" (click)="connect()">Connect</button>
+        <button class="start-sequence-btn purple-btn-fill" (click)="connect()">Connect</button>
       </div>
       <div *ngIf="hasWallet">
         <div class="form-ballance-container">
@@ -40,7 +40,7 @@
           <ng-select placeholder="Select" formControlName="token" [items]="token" bindLabel="label" [searchable]="false" (change)="applyTokenSelect($event)" NgModel="tokenOption" [disabled]="!hasWallet"></ng-select>
         </div>
         <div  class="terms-conditions-wrapper">
-        <button class="start-sequence-btn purple-btn-fill filter-btn" [disabled]="!hasWallet || !chainOption || !tokenOption || chainError || geneBalance == '-' || gnomeBalance == '-'">Deposit</button>
+        <button class="start-sequence-btn purple-btn-fill" [disabled]="!hasWallet || !chainOption || !tokenOption || chainError || geneBalance == '-' || gnomeBalance == '-'">Deposit</button>
         <div class="terms-conditions" [ngClass]="{'opaque': !hasWallet }">By depositing my GENE or GNOME tokens I agree to the <a target=”_blank” routerLink="/terms">Terms and Conditions</a> of the GENOME airdrop</div>
         </div>
       </form>
@@ -49,6 +49,59 @@
           <img class="helix-img" src="./assets/img/token-exchange/circle-info.svg" alt=""/>
         </div>
         <div class="info-text">To prevent double dipping GENOME will be airdropped to your wallet at 10am UTC on the following day for all wallets that qualify.</div>
+      </div>
+    </div>
+    <div class="status-container" *ngIf="transactionState != 0">
+      <div class="pending-container" *ngIf="transactionState == 1">
+        <img class="pending-img" src="./assets/img/token-exchange/pending-icon.svg" alt=""/>
+        <div class="status-header">PENDING</div>
+        <div class="status-subheader">Your transaction is curretly being processed</div>
+        <div class="status-wallet"> 
+          <img class="wallet-img" src="./assets/img/token-exchange/wallet.svg" alt=""/><span class="icon-adjustment">Connected via {{providerType.name}}</span><span> -</span><span> {{accounts.slice(0,7) + "..." + accounts.slice(accounts.length - 5)}}</span>
+        </div>
+        <div class="status-transaction-hash">
+          Hash: <a target=”_blank” [href]="transactionHashLink">{{transactionHash}}</a>
+        </div>
+      </div>
+      <div class="success-container" *ngIf="transactionState == 2">
+        <img class="success-img" src="./assets/img/token-exchange/success-icon.svg" alt=""/>
+        <div class="status-header">SUCCESS!</div>
+        <div class="status-subheader">You have successfully deposited</div>
+        <div class="status-balace">
+          <div class="status-balace-amount">
+            {{getBalanceAmount(this.transactionBalance)}}
+          </div>
+          <div class="status-balace-token">
+            {{this.tokenOption.key}}
+          </div>
+        </div>
+        <div class="status-wallet"> 
+          <img class="wallet-img" src="./assets/img/token-exchange/wallet.svg" alt=""/><span class="icon-adjustment">Connected via {{providerType.name}}</span><span> -</span><span> {{accounts.slice(0,7) + "..." + accounts.slice(accounts.length - 5)}}</span>
+        </div>
+        <div class="status-transaction-hash">
+          Hash: <a target=”_blank” [href]="transactionHashLink">{{transactionHash}}</a>
+        </div>
+      </div>
+      <div class="failure-container" *ngIf="transactionState == 3">
+        <img class="failure-img" src="./assets/img/token-exchange/failure-icon.svg" alt=""/>
+        <div class="status-header">Something went wrong.</div>
+        <div class="status-subheader">We couldn’t complete your action. Please return and try again</div>
+        <div class="status-wallet"> 
+          <img class="wallet-img" src="./assets/img/token-exchange/wallet.svg" alt=""/><span class="icon-adjustment">Connected via {{providerType.name}}</span><span> -</span><span> {{accounts.slice(0,7) + "..." + accounts.slice(accounts.length - 5)}}</span>
+        </div>
+        <div class="status-transaction-hash">
+          Hash: <a target=”_blank” [href]="transactionHashLink">{{transactionHash}}</a>
+        </div>
+      </div>
+      <div>
+        <div class="status-footer-text" *ngIf="transactionState == 2">If you have more tokens to deposit please return to the start here</div>
+        <button class="start-sequence-btn purple-btn" *ngIf="transactionState == 2 || transactionState == 3" (click)="onBackAction()">Back</button>
+        <div class="status-info-container">
+          <div class="info-icon">
+            <img class="helix-img" src="./assets/img/token-exchange/circle-info.svg" alt=""/>
+          </div>
+          <div class="info-text">You will manually be airdropped GENOME on BASE to this address in the next 24 hours</div>
+        </div>
       </div>
     </div>
   </div>
