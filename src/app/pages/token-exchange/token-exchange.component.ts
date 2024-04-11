@@ -6,6 +6,7 @@ import GnomeAbi from "../../contracts/GnomeAbi.json";
 import chain from "../../constants/chains.json";
 import tokens from "../../constants/tokens.json";
 import { NgSelectComponent } from "@ng-select/ng-select";
+import BigNumber from "bignumber.js";
 
 import {
   GENE_ADDRESSES,
@@ -202,7 +203,6 @@ export class TokenExchangeComponent implements OnInit {
       } catch (error) {
         console.log(error)
         if (error.code == 4902) {
-          console.log('hee')
           try {
             await ethereum.request({
               method: "wallet_addEthereumChain",
@@ -270,6 +270,17 @@ export class TokenExchangeComponent implements OnInit {
           _balance
       );
       this.updateBalance();
+    }
+  }
+
+
+  getBalanceAmount(amount: any, decimals = 18) {
+    if (amount == '-') {
+      return amount
+    } else {
+      const bigAmount = new BigNumber(amount)
+      const BIG_TEN = new BigNumber(10);
+      return new BigNumber(bigAmount).dividedBy(BIG_TEN.pow(decimals));
     }
   }
 }

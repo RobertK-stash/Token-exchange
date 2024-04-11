@@ -13,7 +13,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [BrowserModule, CommonModule, FormsModule, ReactiveFormsModule, NgSelectModule, RouterModule.forRoot(routes),],
+  imports: [BrowserModule, CommonModule, FormsModule, ReactiveFormsModule, NgSelectModule, RouterModule.forRoot(routes, { useHash: true })],
   declarations: [
     TokenExchangeComponent,
     TermsComponent

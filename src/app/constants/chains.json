@@ -6,7 +6,7 @@
     "name": "Arbitrum One",
     "chainId": 42161,
     "rpcUrls": [
-      "https://arbitrum-mainnet.infura.io"
+      "https://arb1.arbitrum.io/rpc"
     ],
     "nativeCurrency": {
       "name": "ETH",
@@ -14,7 +14,7 @@
       "decimals": 18
     },
     "blockExplorerUrls": [
-      "https://explorer.arbitrum.io"
+      "https://arbiscan.io"
     ]
   },
   {

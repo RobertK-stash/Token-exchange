@@ -22,7 +22,7 @@
           <div class="form-ballance-container-wrapper">
               <div class="form-balance">Your Balance</div>
               <div class="form-ballance-wrapper">
-                <div class="form-tokens"><span>{{geneBalance}} GENE</span><span class='divider small-hide'></span><span>{{gnomeBalance}} GNOME</span></div>
+                <div class="form-tokens"><span>{{getBalanceAmount(geneBalance)}} GENE</span><span class='divider small-hide'></span><span>{{getBalanceAmount(gnomeBalance)}} GNOME</span></div>
                 <div class="form-wallet"><img class="wallet-img" src="./assets/img/token-exchange/wallet.svg" alt=""/> <span>Connected via {{providerType.name}}</span><span class='small-hide'> -</span><span> {{accounts.slice(0,7) + "..." + accounts.slice(accounts.length - 5)}}</span></div>
               </div>
           </div>
