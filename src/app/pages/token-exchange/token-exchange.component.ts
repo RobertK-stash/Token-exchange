@@ -103,6 +103,7 @@ export class TokenExchangeComponent implements OnInit {
   isConnected:any = isConnected;
   provider: any;
   providerType: any;
+  testChain: any;
  
   constructor(
     private formBuilder: FormBuilder,
@@ -144,6 +145,7 @@ export class TokenExchangeComponent implements OnInit {
   }
 
   clearEvent() {
+    this.testChain = '';
     this.geneBalance = "-";
     this.gnomeBalance = "-";
   }
@@ -151,6 +153,7 @@ export class TokenExchangeComponent implements OnInit {
   async updateBalance() {
     this.geneBalance = await this.geneContract.balanceOf(this.accounts);
     this.gnomeBalance = await this.gnomeContract.balanceOf(this.accounts);
+    console.log('Account: ' + this.accounts + "   Chain: " + this.testChain + "   GENE: " + this.geneBalance + "  GNOME: " + this.gnomeBalance)
   }
 
   applyChainSelect(event) {
@@ -172,14 +175,17 @@ export class TokenExchangeComponent implements OnInit {
       case "Ethereum":
       this.geneContract = new Contract(GENE_ADDRESSES.ETHEREUM, GeneAbi, this.provider);
       this.gnomeContract = new Contract(GNOME_ADDRESSES.ETHEREUM, GnomeAbi, this.provider);
+      this.testChain = event.label;
       break;
       case "Arbitrum":
       this.geneContract = new Contract(GENE_ADDRESSES.ARBITRUM, GeneAbi, this.provider);
       this.gnomeContract = new Contract(GNOME_ADDRESSES.ARBITRUM, GnomeAbi, this.provider);
+      this.testChain = event.label;
       break;
       case "Polygon":
       this.geneContract = new Contract(GNOME_ADDRESSES.POLYGON, GeneAbi, this.provider);
       this.gnomeContract = new Contract(GNOME_ADDRESSES.POLYGON, GnomeAbi, this.provider);
+      this.testChain = event.label;
       break;
       default:
       this.clearEvent();
