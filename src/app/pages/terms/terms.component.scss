@@ -1,6 +1,7 @@
 @import "src/styles-variables";
 .background-img {
-  position: absolute;
+  position: fixed;
+  overflow: hidden;
 }
 .header-img {
   margin-left: auto;
@@ -8,9 +9,12 @@
   margin-bottom: 55px;
   margin-top: 75px;
 }
-.token-exchange-terms-wraper{
+.token-exchange-terms-wraper {
   display: flex;
   flex-direction: column;
+}
+.token-exchange-mobile-header {
+  display: none;
 }
 .token-exchange-terms-container {
   padding: 70px 60px;
@@ -61,4 +65,65 @@
       margin-top: 25px;
      }
   }
+}
+@media only screen and (max-width : 1824px) {
+  .token-exchange-terms-container {
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+}
+
+@media only screen and (max-width : 1524px) {
+  .token-exchange-terms-container {
+    margin-left: 12%;
+    margin-right: 12%;
+  }
+
+}
+
+@media only screen and (max-width : 1224px) {
+  .token-exchange-terms-container {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}
+@media only screen and (max-width : 1024px) {
+  .token-exchange-mobile-header {
+    background-color: #CAA8F3;
+    display: block;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    z-index: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .header-text {
+      color: #6C24A5;
+      font-feature-settings: 'clig' off, 'liga' off;
+      font-family: DMSans-Bold;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 30px; /* 150% */
+      text-align: center;
+    }
+    .logo-img {
+      width: 155px;
+      margin: auto;
+    }
+  }
+  .header-img {
+    display: none;
+  }
+  .token-exchange-terms-container {
+    margin-left: 0px;
+    margin-right: 0px;
+    border-radius: 0px;
+    margin-top: -40px;
+  }
+}
+
+@media only screen and (max-width : 365px) {
+
 }
