@@ -1,5 +1,5 @@
 
-<div class="background-img"></div>
+<div class="background-img" [ngClass]="{'background-img-small': transactionState != 0 }"></div>
 <div class="token-exchange-container">
   <div class="token-form-container">
     <div class="image-container" [ngClass]="{'mobile-adjustment': hasWallet }">
@@ -96,7 +96,7 @@
       <div>
         <div class="status-footer-text" *ngIf="transactionState == 2">If you have more tokens to deposit please return to the start here</div>
         <button class="start-sequence-btn purple-btn" *ngIf="transactionState == 2 || transactionState == 3" (click)="onBackAction()">Back</button>
-        <div class="status-info-container">
+        <div class="status-info-container small-hide">
           <div class="info-icon">
             <img class="helix-img" src="./assets/img/token-exchange/circle-info.svg" alt=""/>
           </div>
@@ -110,7 +110,8 @@
       <div class="info-icon">
         <img class="helix-img" src="./assets/img/token-exchange/circle-info.svg" alt=""/>
       </div>
-      <div class="info-text">To prevent double dipping GENOME will be airdropped to your wallet at 10am UTC on the following day for all wallets that qualify.</div>
+      <div class="info-text" *ngIf="transactionState == 0">To prevent double dipping GENOME will be airdropped to your wallet at 10am UTC on the following day for all wallets that qualify.</div>
+      <div class="info-text" *ngIf="transactionState != 0">You will manually be airdropped GENOME on BASE to this address in the next 24 hours</div>
     </div>
   </div>
 </div>

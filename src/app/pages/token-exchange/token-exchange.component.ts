@@ -275,7 +275,8 @@ export class TokenExchangeComponent implements OnInit {
           _this.transactionState = 1; //pending
         } catch {
         // user canceled by closing metamask window or wallet 
-          console.log('TODO');
+           _this.chainError = "User canceled the transaction";
+          _this.clearEvent();
         }
         const receipt = await tx.wait(1);
         // at this stage tx should have a status

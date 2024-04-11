@@ -246,6 +246,7 @@
     padding-right: 105px;
     padding-left: 95px;
     padding-top: 80px;
+    width: 100%;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -409,7 +410,7 @@
 }
 @media only screen and (max-width : 1024px) {
   .small-hide {
-    display: none;
+    display: none !important;
   }
   .small-show {
     display: inline-block;
@@ -417,6 +418,9 @@
   .background-img {
     height: 785px;
     position: absolute;
+  }
+  .background-img-small {
+    height: 550px;
   }
   .token-exchange-container {
     padding: 0px;
@@ -538,6 +542,20 @@
       .token-info-container-mobile {
         display: flex;
         margin: 0px 15px;
+      }
+    }
+    .status-container {
+      margin: auto;
+      max-width: 400px;
+      min-height: 400px;
+      padding: 50px 10px;
+      .pending-img, .success-img, .failure-img {
+        margin-top: 50px;
+        margin-bottom: 15px;
+      }
+      .status-transaction-hash {
+        word-wrap: break-word;
+        word-break: break-all;
       }
     }
   }

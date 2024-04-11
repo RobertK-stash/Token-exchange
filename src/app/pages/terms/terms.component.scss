@@ -8,6 +8,7 @@
   margin-right: auto;
   margin-bottom: 55px;
   margin-top: 75px;
+  cursor: pointer;
 }
 .token-exchange-terms-wraper {
   display: flex;
@@ -87,7 +88,7 @@
     margin-right: 10%;
   }
 }
-@media only screen and (max-width : 1024px) {
+@media only screen and (max-width : 624px) {
   .token-exchange-mobile-header {
     background-color: #CAA8F3;
     display: block;
@@ -102,15 +103,19 @@
       color: #6C24A5;
       font-feature-settings: 'clig' off, 'liga' off;
       font-family: DMSans-Bold;
-      font-size: 20px;
+      font-size: 30px;
       font-style: normal;
       font-weight: 700;
       line-height: 30px; /* 150% */
       text-align: center;
+      margin-top: 45px;
     }
     .logo-img {
-      width: 155px;
+      width: 235px;
       margin: auto;
+      margin-top: 5px;
+      margin-bottom: 30px;
+      cursor: pointer;
     }
   }
   .header-img {
@@ -121,6 +126,10 @@
     margin-right: 0px;
     border-radius: 0px;
     margin-top: -40px;
+    padding: 70px 20px;
+    .token-exchange-terms-header{
+      margin-top: 0px;
+    }
   }
 }
 
