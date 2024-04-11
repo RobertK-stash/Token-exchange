@@ -157,7 +157,6 @@ export class TokenExchangeComponent implements OnInit {
     this.gnomeBalance = await this.gnomeContract.balanceOf(this.accounts);
     console.log('Account: ' + this.accounts + "   Chain: " + this.testChain + "   GENE: " + this.geneBalance + "  GNOME: " + this.gnomeBalance + " GENE ADDR: " + this.testGeneaddr + " GNOME ADDR: " + this.testGnomeaddr)
   }
-  
 
   applyChainSelect(event) {
     this.clearEvent();
@@ -190,7 +189,7 @@ export class TokenExchangeComponent implements OnInit {
       this.testChain = event.label;
       break;
       case "Polygon":
-      this.geneContract = new Contract(GNOME_ADDRESSES.POLYGON, GeneAbi, this.provider);
+      this.geneContract = new Contract(GENE_ADDRESSES.POLYGON, GeneAbi, this.provider);
       this.gnomeContract = new Contract(GNOME_ADDRESSES.POLYGON, GnomeAbi, this.provider);
       this.testGeneaddr = GENE_ADDRESSES.POLYGON;
       this.testGnomeaddr = GNOME_ADDRESSES.POLYGON;
