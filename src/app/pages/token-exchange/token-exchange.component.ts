@@ -101,7 +101,6 @@ export class TokenExchangeComponent implements OnInit {
   chainSelect: NgSelectComponent;
   isConnected:any = isConnected;
   provider: any;
-  ethBalance: any;
   providerType: any;
  
   constructor(

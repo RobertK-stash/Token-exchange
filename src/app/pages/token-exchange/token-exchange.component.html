@@ -3,10 +3,12 @@
 <div class="token-exchange-container">
   <div class="token-form-container">
     <div class="image-container" [ngClass]="{'mobile-adjustment': hasWallet }">
-      <img class="helix-img" src="/assets/img/token-exchange/purple-helix.svg" alt=""/>
-      <div class="image-text-container">
-        <div class="image-header">Welcome to</div>
-        <img class="logo-img" src="/assets/img/token-exchange/genomes-dao.svg" alt=""/>
+      <div class="image-container-wrapper">
+        <img class="helix-img" src="/assets/img/token-exchange/purple-helix.svg" alt=""/>
+        <div class="image-text-container">
+          <div class="image-header">Welcome to</div>
+          <img class="logo-img" src="/assets/img/token-exchange/genomes-dao.svg" alt=""/>
+        </div>
       </div>
     </div>
     <div class="form-container">
@@ -17,10 +19,12 @@
       </div>
       <div *ngIf="hasWallet">
         <div class="form-ballance-container">
-          <div class="form-ballance-wrapper">
-            <div class="form-balance">Your Balance {{ethBalance}} </div>
-            <div class="form-tokens">{{geneBalance}} GENE<span class='divider'></span>{{gnomeBalance}} GNOME</div>
-            <div class="form-wallet"><img class="helix-img" src="/assets/img/token-exchange/wallet.svg" alt=""/> Connected via {{providerType.name}} - {{accounts.slice(0,7) + "..." + accounts.slice(accounts.length - 5)}}</div>
+          <div class="form-ballance-container-wrapper">
+              <div class="form-balance">Your Balance</div>
+              <div class="form-ballance-wrapper">
+                <div class="form-tokens"><span>{{geneBalance}} GENE</span><span class='divider small-hide'></span><span>{{gnomeBalance}} GNOME</span></div>
+                <div class="form-wallet"><img class="wallet-img" src="/assets/img/token-exchange/wallet.svg" alt=""/> <span>Connected via {{providerType.name}}</span><span class='small-hide'> -</span><span> {{accounts.slice(0,7) + "..." + accounts.slice(accounts.length - 5)}}</span></div>
+              </div>
           </div>
         </div>
         <div class="form-warning no-chain-warning" *ngIf="!chainOption">! PLEASE SELECT CHAIN IN ORDER TO SEE YOUR BALANCE</div>
@@ -37,7 +41,7 @@
         </div>
         <div  class="terms-conditions-wrapper">
         <button class="start-sequence-btn purple-btn-fill filter-btn" [disabled]="!hasWallet || !chainOption || !tokenOption || chainError || geneBalance == '-' || gnomeBalance == '-'">Deposit</button>
-        <div class="terms-conditions" [ngClass]="{'opaque': !hasWallet }">By depositing my GENE or GNOME tokens I agree to the <a target=”_blank” routerLink="/terms">Terms and Conditions</a></div>
+        <div class="terms-conditions" [ngClass]="{'opaque': !hasWallet }">By depositing my GENE or GNOME tokens I agree to the <a target=”_blank” routerLink="/terms">Terms and Conditions</a> of the GENOME airdrop</div>
         </div>
       </form>
       <div class="token-info-container">
@@ -48,10 +52,12 @@
       </div>
     </div>
   </div>
-  <div class="token-info-container-mobile">
-    <div class="info-icon">
-      <img class="helix-img" src="/assets/img/token-exchange/circle-info.svg" alt=""/>
+  <div class="token-info-container-mobile-wrapper">
+    <div class="token-info-container-mobile">
+      <div class="info-icon">
+        <img class="helix-img" src="/assets/img/token-exchange/circle-info.svg" alt=""/>
+      </div>
+      <div class="info-text">To prevent double dipping GENOME will be airdropped to your wallet at 10am UTC on the following day for all wallets that qualify.</div>
     </div>
-    <div class="info-text">To prevent double dipping GENOME will be airdropped to your wallet at 10am UTC on the following day for all wallets that qualify.</div>
   </div>
 </div>

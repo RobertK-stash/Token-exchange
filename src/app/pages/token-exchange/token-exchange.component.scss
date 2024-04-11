@@ -81,15 +81,18 @@
       color: #6C24A5 !important;
     }
     .image-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
       padding: 0 10%;
       background-color: rgba(183, 138, 240, 0.7);
       border-radius: 40px;
       box-shadow: 1px 1px 30px 0px rgba(0, 0, 0, 0.10);
       backdrop-filter: blur(10px);
+      .image-container-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
       .image-header {
         color: #6C24A5;
         text-align: center;
@@ -133,6 +136,7 @@
         font-style: normal;
         font-weight: 700;
         line-height: 60px;
+        text-transform: uppercase;
       }
       .form-tokens {
         color: #6C24A5;
@@ -291,6 +295,10 @@
   .small-show {
     display: inline-block;
   }
+  .background-img {
+    height: 785px;
+    position: absolute;
+  }
   .token-exchange-container {
     padding: 0px;
     min-width: unset;
@@ -301,7 +309,14 @@
         border-top-right-radius: 0px;
         padding-top: 50px;
         padding-bottom: 40px;
-        flex-direction: row;
+        padding-right: 15px;
+        padding-left: 15px;
+        .image-container-wrapper {
+          flex-direction: row;
+          max-width: 400px;
+          margin: auto;
+          width: 100%;
+        }
         img {
           width: 125px;
         }
@@ -311,7 +326,7 @@
             margin-bottom: 10px;
           }
           .logo-img {
-            width: 255px;
+            width: 225px;
           }
         }
       }
@@ -322,11 +337,25 @@
         .image-text-container {
           min-width: 300px;
         }
+        .image-container-wrapper {
+          justify-content: left;
+        }
+        .image-header {
+          margin-top: 25px
+        }
       }
       .form-container {
+        .form-subheader{
+          margin-top: 30px;
+        }
         .form-header-wrapper, .form-actions, .no-chain-warning {
           max-width: 400px;
           margin: auto;
+          padding-left: 15px;
+          padding-right: 15px;
+        }
+        .no-chain-warning {
+          margin-top: 5px;
         }
         padding: 0px;
         .form-ballance-container{
@@ -334,22 +363,69 @@
           background: rgba(202, 168, 243, 0.30);
           margin-top: -225px;
           padding-top: 240px;
-          .form-ballance-wrapper{
+          .form-ballance-container-wrapper {
             max-width: 400px;
             margin: auto;
+            display: flex;
+            flex-direction: column;
+            padding: 0px 15px;
+            .form-ballance-wrapper{
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+            }
+            .form-tokens, .form-wallet {
+              display: flex;
+              flex-direction: column;
+              margin-bottom: 35px;
+            }
+            .form-tokens {
+              justify-content: end;
+              font-size: 14px;
+              span {
+                margin-top: 15px;
+              }
+            }
+            .form-wallet {
+              border-left: 1px solid rgba(127, 17, 224, 0.4);
+              padding-left: 15px;
+            }
+            .wallet-img {
+              width: 20px;
+              height: 24px;
+            }
           }
         }
         .terms-conditions-wrapper{
           display: flex;
           flex-direction: column-reverse;
+          .terms-conditions {
+            margin-top: 30px;
+          }
+          button {
+            margin-top: 30px;
+            margin-bottom: 50px;
+          }
         }
       }
       .token-info-container {
         display: none;
       }
     }
-    .token-info-container-mobile {
-      display: flex;
+    .token-info-container-mobile-wrapper {
+      margin: 35px auto;
+      margin-bottom: 65px;
+      max-width: 400px;
+      .token-info-container-mobile {
+        display: flex;
+        margin: 0px 15px;
+      }
     }
+  }
+}
+
+@media only screen and (max-width : 365px) {
+  .helix-img {
+    display: none;
   }
 }
