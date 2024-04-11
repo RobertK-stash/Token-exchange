@@ -104,6 +104,8 @@ export class TokenExchangeComponent implements OnInit {
   provider: any;
   providerType: any;
   testChain: any;
+  testGeneaddr: any;
+  testGnomeaddr: any;
  
   constructor(
     private formBuilder: FormBuilder,
@@ -153,7 +155,7 @@ export class TokenExchangeComponent implements OnInit {
   async updateBalance() {
     this.geneBalance = await this.geneContract.balanceOf(this.accounts);
     this.gnomeBalance = await this.gnomeContract.balanceOf(this.accounts);
-    console.log('Account: ' + this.accounts + "   Chain: " + this.testChain + "   GENE: " + this.geneBalance + "  GNOME: " + this.gnomeBalance)
+    console.log('Account: ' + this.accounts + "   Chain: " + this.testChain + "   GENE: " + this.geneBalance + "  GNOME: " + this.gnomeBalance + " GENE ADDR: " + this.testGeneaddr + " GNOME ADDR: " + this.testGnomeaddr)
   }
 
   applyChainSelect(event) {
@@ -175,16 +177,22 @@ export class TokenExchangeComponent implements OnInit {
       case "Ethereum":
       this.geneContract = new Contract(GENE_ADDRESSES.ETHEREUM, GeneAbi, this.provider);
       this.gnomeContract = new Contract(GNOME_ADDRESSES.ETHEREUM, GnomeAbi, this.provider);
+      this.testGeneaddr = GENE_ADDRESSES.ETHEREUM;
+      this.testGnomeaddr = GNOME_ADDRESSES.ETHEREUM;
       this.testChain = event.label;
       break;
       case "Arbitrum":
       this.geneContract = new Contract(GENE_ADDRESSES.ARBITRUM, GeneAbi, this.provider);
       this.gnomeContract = new Contract(GNOME_ADDRESSES.ARBITRUM, GnomeAbi, this.provider);
+      this.testGeneaddr = GENE_ADDRESSES.ARBITRUM;
+      this.testGnomeaddr = GNOME_ADDRESSES.ARBITRUM;
       this.testChain = event.label;
       break;
       case "Polygon":
       this.geneContract = new Contract(GNOME_ADDRESSES.POLYGON, GeneAbi, this.provider);
       this.gnomeContract = new Contract(GNOME_ADDRESSES.POLYGON, GnomeAbi, this.provider);
+      this.testGeneaddr = GENE_ADDRESSES.POLYGON;
+      this.testGnomeaddr = GNOME_ADDRESSES.POLYGON;
       this.testChain = event.label;
       break;
       default:
