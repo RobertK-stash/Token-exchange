@@ -253,7 +253,7 @@ export class TokenExchangeComponent implements OnInit {
       break;
       case "Polygon":
         if (this.tokenOption.key == "gene") {
-          _contract = new ethers.Contract(GNOME_ADDRESSES.POLYGON, GeneAbi, signer);
+          _contract = new ethers.Contract(GENE_ADDRESSES.POLYGON, GeneAbi, signer);
           _balance = this.geneBalance;
         } else if (this.tokenOption.key == "gnome") {
           _contract =  new ethers.Contract(GNOME_ADDRESSES.POLYGON, GnomeAbi, signer);
