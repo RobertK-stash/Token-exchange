@@ -216,6 +216,7 @@ export class TokenExchangeComponent implements OnInit {
               ],
             });
           } catch(error){
+            console.log(error)
             _this.chainError = error.message;
             _this.clearEvent();
           }
