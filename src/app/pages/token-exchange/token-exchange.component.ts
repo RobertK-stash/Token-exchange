@@ -118,7 +118,7 @@ export class TokenExchangeComponent implements OnInit {
           _this.accounts = addr;
           _this.exchangeForm.get("chain").enable();
           _this.exchangeForm.get("token").enable();
-          _this.provider = new ethers.BrowserProvider(window.ethereum);
+          _this.provider = new ethers.BrowserProvider(modal.getWalletProvider());
           _this.providerType = modal.getWalletInfo();
         }
       }, 500);
@@ -157,18 +157,17 @@ export class TokenExchangeComponent implements OnInit {
     this.clearEvent();
     this.chainError = '';
     this.chainOption = event;
-    const ethereum = (window as any).ethereum;
+    const ethereum = modal.getWalletProvider();
     if (ethereum) {
       this.changeChain(ethereum, event)
     }
   }
-
   applyTokenSelect(event) {
     this.tokenOption = event;
   }
 
   generateNewContracts( event ){
-    this.provider = new ethers.BrowserProvider(window.ethereum);
+    this.provider = new ethers.BrowserProvider(modal.getWalletProvider());
     switch (event.label) {
       case "Ethereum":
       this.geneContract = new Contract(GENE_ADDRESSES.ETHEREUM, GeneAbi, this.provider);
@@ -272,7 +271,6 @@ export class TokenExchangeComponent implements OnInit {
       this.updateBalance();
     }
   }
-
 
   getBalanceAmount(amount: any, decimals = 18) {
     if (amount == '-') {
