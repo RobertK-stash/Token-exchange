@@ -41,8 +41,8 @@ const arbitrum = {
   chainId: 42161,
   name: 'Arbitrum One',
   currency: 'ETH',
-  explorerUrl: 'https://explorer.arbitrum.io',
-  rpcUrl: 'https://arbitrum-mainnet.infura.io'
+  explorerUrl: 'https://arbiscan.io',
+  rpcUrl: 'https://arb1.arbitrum.io/rpc'
 }
 
 // 3. Create your application's metadata object
@@ -157,6 +157,7 @@ export class TokenExchangeComponent implements OnInit {
     this.gnomeBalance = await this.gnomeContract.balanceOf(this.accounts);
     console.log('Account: ' + this.accounts + "   Chain: " + this.testChain + "   GENE: " + this.geneBalance + "  GNOME: " + this.gnomeBalance + " GENE ADDR: " + this.testGeneaddr + " GNOME ADDR: " + this.testGnomeaddr)
   }
+  
 
   applyChainSelect(event) {
     this.clearEvent();
