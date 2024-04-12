@@ -110,22 +110,7 @@ export class TokenExchangeComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
   ) {
-    const _this = this;
-
-    modal.subscribeWalletInfo(event => {
-      _this.hasWallet = false;
-      setTimeout(function () {
-        const addr = modal.getAddress();
-        if (addr){
-          _this.hasWallet = true;
-          _this.accounts = addr;
-          _this.exchangeForm.get("chain").enable();
-          _this.exchangeForm.get("token").enable();
-          _this.provider = new ethers.BrowserProvider(modal.getWalletProvider());
-          _this.providerType = modal.getWalletInfo();
-        }
-      }, 500);
-    })
+    this.disconnect();
   }
 
   ngOnInit() {
@@ -135,6 +120,40 @@ export class TokenExchangeComponent implements OnInit {
     });
     this.exchangeForm.get("chain").disable();
     this.exchangeForm.get("token").disable();
+    const _this = this;
+    modal.subscribeWalletInfo(event => {
+      setTimeout(function () {
+        const addr = modal.getAddress();
+        if (addr){
+          _this.exchangeForm.get("chain").enable();
+          _this.exchangeForm.get("token").enable();
+          _this.provider = new ethers.BrowserProvider(modal.getWalletProvider());
+          _this.providerType = modal.getWalletInfo();
+          _this.accounts = addr;
+          _this.hasWallet = true;
+        }
+      }, 500);
+    })
+  }
+
+  async selectAccount() {
+    try {
+      await modal.getWalletProvider().request({
+        method: "wallet_requestPermissions",
+        params: [
+          {
+            eth_accounts: {},
+          },
+        ],
+      });
+      this.provider = new ethers.BrowserProvider(modal.getWalletProvider());
+      this.providerType = modal.getWalletInfo();
+      this.accounts = modal.getAddress();
+      this.clearEvent();
+      this.generateNewContracts();
+    } catch (error) {
+        console.log(error)
+    }
   }
 
   async disconnect() {
@@ -144,6 +163,10 @@ export class TokenExchangeComponent implements OnInit {
   connect() {
     this.disconnect();
     modal.open();
+  }
+  
+  changeAddress() {
+    this.selectAccount();
   }
 
   clearEvent() {
@@ -169,9 +192,9 @@ export class TokenExchangeComponent implements OnInit {
     this.tokenOption = event;
   }
 
-  generateNewContracts( event ){
+  generateNewContracts(){
     this.provider = new ethers.BrowserProvider(modal.getWalletProvider());
-    switch (event.label) {
+    switch (this.chainOption.label) {
       case "Ethereum":
       this.geneContract = new Contract(GENE_ADDRESSES.ETHEREUM, GeneAbi, this.provider);
       this.gnomeContract = new Contract(GNOME_ADDRESSES.ETHEREUM, GnomeAbi, this.provider);
@@ -201,7 +224,7 @@ export class TokenExchangeComponent implements OnInit {
           method: "wallet_switchEthereumChain",
           params: [{ chainId: `0x${event.chainId.toString(16)}` }],
         });
-        this.generateNewContracts(event);
+        this.generateNewContracts();
       } catch (error) {
         console.log(error)
         if (error.code == 4902) {
