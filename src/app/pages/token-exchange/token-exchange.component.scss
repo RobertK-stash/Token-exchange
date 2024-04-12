@@ -158,6 +158,10 @@
         font-style: normal;
         font-weight: 700;
         line-height: 28px;
+        .form-wallet-wrapper {
+          cursor: pointer;
+          width: fit-content;
+        }
         img {
           margin-right: 10px;
         }
